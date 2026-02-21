@@ -1,7 +1,7 @@
-import dbConnect from "@/src/lib/dbConnect";
-import UserModel from "@/src/models/User";
+import dbConnect from "@/lib/dbConnect";
+import UserModel from "@/models/User";
 import {success, z} from "zod";
-import { usernameValidation } from "@/src/schemas/signUpSchema";
+import { usernameValidation } from "@/schemas/signUpSchema";
 
 const UsernameQuerySchema = z.object({
     username: usernameValidation
@@ -35,10 +35,13 @@ export async function GET(request : Request){
                 message: "Username is already taken."
             } , { status: 409 });
         }
-        return Response.json({
-            success: true,  
-            message: "Username is available."
-        } , { status: 200 });
+        return Response.json(
+          {
+            success: true,
+            message: "Username is unique",
+          },
+          { status: 200 },
+        );
 
 
 

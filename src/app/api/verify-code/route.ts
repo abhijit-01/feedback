@@ -1,5 +1,5 @@
-import dbConnect from "@/src/lib/dbConnect";
-import UserModel from "@/src/models/User";
+import dbConnect from "@/lib/dbConnect";
+import UserModel from "@/models/User";
 import { decode } from "punycode";
 
 
