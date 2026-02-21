@@ -18,7 +18,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "./ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { ApiResponse } from "@/types/ApiResponse";
 
 type MessageCardProps = {
@@ -27,25 +27,23 @@ type MessageCardProps = {
 };
 
 export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
-  const { toast } = useToast();
-
   const handleDeleteConfirm = async () => {
+    const id = message._id.toString();
+
     try {
       const response = await axios.delete<ApiResponse>(
-        `/api/delete-message/${message._id}`,
+        `/api/delete-message/${id}`,
       );
-      toast({
-        title: response.data.message,
-      });
-      onMessageDelete(message._id);
+
+      toast.success(response.data.message);
+
+      onMessageDelete(id);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
-      toast({
-        title: "Error",
-        description:
-          axiosError.response?.data.message ?? "Failed to delete message",
-        variant: "destructive",
-      });
+
+      toast.error(
+        axiosError.response?.data.message ?? "Failed to delete message",
+      );
     }
   };
 

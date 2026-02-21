@@ -1,10 +1,11 @@
 let choice1 = "Sonakshi";
 let choice2 = "Siuli";
+let choice3 = "Rutvee";
 
 let ayushWife : string = "";
 
-let index = Math.floor(Math.random() * 2);
-let choices : string[] = [choice1, choice2];
+let index = Math.floor(Math.random() * 3);
+let choices : string[] = [choice1, choice2 , choice3];
 ayushWife = choices[index];
 
 
